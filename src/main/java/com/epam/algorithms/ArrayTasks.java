@@ -11,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-        return null;
+        return new String[]{"winter", "spring", "summer", "autumn"};
     }
 
     /**
@@ -23,7 +23,11 @@ public class ArrayTasks {
      * length = 1  -> [1] length = 3  -> [1, 2, 3] length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-        return null;
+        int[] nums = new int[length];
+        for (int i = 0; i < length; i++) {
+            nums[i] = i + 1;
+        }
+        return nums;
     }
 
     /**
@@ -34,7 +38,11 @@ public class ArrayTasks {
      * arr = [1, 3, 5]   -> sum = 9 arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-        return 0;
+        int sum = 0;
+        for (int number : arr) {
+            sum += number;
+        }
+        return sum;
     }
 
     /**
@@ -46,7 +54,14 @@ public class ArrayTasks {
      * arr = [99, -7, 102], number = -7    ->   2 arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-        return 0;
+        int index = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == number) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     /**
@@ -58,7 +73,12 @@ public class ArrayTasks {
      * "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-        return null;
+        for (int i = 0; i < arr.length / 2; i++) {
+            String temp = arr[i];
+            arr[i] = arr[arr.length - 1 - i];
+            arr[arr.length - 1 - i] = temp;
+        }
+        return arr;
     }
 
     /**
@@ -70,7 +90,21 @@ public class ArrayTasks {
      * arr = [1,-2, 3]      -> [1, 3] arr = [-1, -2, -3]   -> [] arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-        return null;
+        int countPositiveNumbers = 0;
+        for (int value : arr) {
+            if (value > 0) {
+                countPositiveNumbers += 1;
+            }
+        }
+        int[] positiveNumbersArray = new int[countPositiveNumbers];
+        int index = 0;
+        for (int number : arr) {
+            if (number > 0) {
+                positiveNumbersArray[index] = number;
+                index += 1;
+            }
+        }
+        return positiveNumbersArray;
     }
 
     /**
@@ -83,7 +117,49 @@ public class ArrayTasks {
      * arr = [[3, 1, 2,], [3,2]] -> [[2, 3], [1, 2, 3]] arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        return null;
+        for (int outerIndex = 0; outerIndex < arr.length; outerIndex++) {
+            for (int innerIndex = 1; innerIndex < arr.length; innerIndex++) {
+                if (arr[innerIndex - 1].length > arr[innerIndex].length) {
+                    int[] temp = arr[innerIndex - 1];
+                    arr[innerIndex - 1] = arr[innerIndex];
+                    arr[innerIndex] = temp;
+                }
+            }
+        }
+        for (int[] subArr : arr) {
+            sortSubArray(subArr);
+        }
+        System.out.print("[");
+        for (int outerIndex = 0; outerIndex < arr.length; outerIndex++) {
+            System.out.print("[");
+            for (int innerIndex = 0; innerIndex < arr[outerIndex].length; innerIndex++) {
+                if (innerIndex < arr[outerIndex].length - 1) {
+                    System.out.print(arr[outerIndex][innerIndex] + ",");
+                } else {
+                    System.out.print(arr[outerIndex][innerIndex]);
+                }
+            }
+            if (outerIndex < arr.length - 1) {
+                System.out.print("], ");
+            } else {
+                System.out.print("]");
+            }
+        }
+        System.out.print("]");
+
+        return arr;
+    }
+
+    private static void sortSubArray(int[] subArr) {
+        for (int outerIndex = 0; outerIndex < subArr.length; outerIndex++) {
+            for (int innerIndex = 1; innerIndex < subArr.length; innerIndex++) {
+                if (subArr[innerIndex - 1] > subArr[innerIndex]) {
+                    int temp = subArr[innerIndex - 1];
+                    subArr[innerIndex - 1] = subArr[innerIndex];
+                    subArr[innerIndex] = temp;
+                }
+            }
+        }
     }
 
 }
